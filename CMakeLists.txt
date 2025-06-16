@@ -9,7 +9,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_subdirectory(vendor/SDL3 EXCLUDE_FROM_ALL)
 
 add_executable(Throne
+  "source/Game.cpp"
   "source/Main.cpp"
+
+  "source/Game.h"
 )
 
 target_link_libraries(Throne PRIVATE SDL3::SDL3)
