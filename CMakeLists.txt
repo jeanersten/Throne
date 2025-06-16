@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+add_subdirectory(vendor/GLAD EXCLUDE_FROM_ALL)
 add_subdirectory(vendor/SDL3 EXCLUDE_FROM_ALL)
 
 add_executable(Throne
@@ -15,7 +16,7 @@ add_executable(Throne
   "source/Game.h"
 )
 
-target_link_libraries(Throne PRIVATE SDL3::SDL3)
+target_link_libraries(Throne PRIVATE glad SDL3::SDL3)
 
 add_custom_command(
   TARGET Throne POST_BUILD

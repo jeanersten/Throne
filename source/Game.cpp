@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <glad/gl.h>
+
 #include <SDL3/SDL.h>
 
 #include <iostream>
@@ -31,6 +33,18 @@ void Game::init()
   if (!m_window)
   {
     std::cerr << "Failed to create SDL window!\n";
+  }
+
+  SDL_GLContext opengl_context = SDL_GL_CreateContext(m_window);
+
+  if (!opengl_context)
+  {
+    std::cerr << "Failed to create SDL OpenGL context!\n";
+  }
+
+  if (!gladLoadGL(SDL_GL_GetProcAddress))
+  {
+    std::cerr << "Failed to retrieved OpenGL functions via GLAD!\n";
   }
 }
 
