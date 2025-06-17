@@ -14,8 +14,10 @@ add_subdirectory(vendor/spdlog EXCLUDE_FROM_ALL)
 
 add_executable(Throne
   "source/Game.cpp"
+  "source/Log.cpp"
   "source/Main.cpp"
 
+  "source/Log.h"
   "source/Game.h"
 )
 
