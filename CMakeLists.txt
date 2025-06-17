@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory(vendor/GLAD EXCLUDE_FROM_ALL)
 add_subdirectory(vendor/SDL3 EXCLUDE_FROM_ALL)
+add_subdirectory(vendor/spdlog EXCLUDE_FROM_ALL)
 
 add_executable(Throne
   "source/Game.cpp"
@@ -18,7 +19,7 @@ add_executable(Throne
   "source/Game.h"
 )
 
-target_link_libraries(Throne PRIVATE glad SDL3::SDL3)
+target_link_libraries(Throne PRIVATE glad SDL3::SDL3 spdlog::spdlog)
 
 add_custom_command(
   TARGET Throne POST_BUILD
