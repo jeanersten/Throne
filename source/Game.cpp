@@ -46,6 +46,12 @@ void Game::init()
   {
     std::cerr << "Failed to retrieved OpenGL functions via GLAD!\n";
   }
+
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+  SDL_GL_SetSwapInterval(1);
+
+  glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
+  glClearDepth(1.0);
 }
 
 void Game::update()
@@ -53,6 +59,7 @@ void Game::update()
   while (m_state != GameState::EXIT)
   {
     handleEvents();
+    handleRendering();
   }
 }
 
@@ -69,6 +76,13 @@ void Game::handleEvents()
       break;
     }
   }
+}
+
+void Game::handleRendering()
+{
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  SDL_GL_SwapWindow(m_window);
 }
 
 void Game::run()

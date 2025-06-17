@@ -22,6 +22,7 @@ private:
   void update();
 
   void handleEvents();
+  void handleRendering();
 
 public:
   Game();
