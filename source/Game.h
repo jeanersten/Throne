@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Sprite.h"
+
 #include <SDL3/SDL.h>
 
 enum class GameState
@@ -17,6 +19,8 @@ private:
   int m_screen_height;
 
   GameState m_state;
+
+  Sprite m_sprite;
 
   void init();
   void update();

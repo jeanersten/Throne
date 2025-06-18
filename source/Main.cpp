@@ -11,13 +11,6 @@ int main(int argc, char* argv[])
 
   Log::setup(LOG_LEVEL_TRACE);
 
-  MSG_TRACE("TRACE: {}", 1);
-  MSG_DEBUG("DEBUG: {}", 2);
-  MSG_INFO("INFO: {}", 3);
-  MSG_WARN("TRACE: {}", 4);
-  MSG_ERROR("ERROR: {}", 5);
-  MSG_CRITICAL("CRITICAL: {}", 6);
-
   Game main_game{ }; 
   main_game.run();
 

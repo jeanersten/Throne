@@ -16,9 +16,11 @@ add_executable(Throne
   "source/Game.cpp"
   "source/Log.cpp"
   "source/Main.cpp"
+  "source/Sprite.cpp"
 
   "source/Log.h"
   "source/Game.h"
+  "source/Sprite.h"
 )
 
 target_link_libraries(Throne PRIVATE glad SDL3::SDL3 spdlog::spdlog)

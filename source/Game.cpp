@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Log.h"
 
 #include <glad/gl.h>
 
@@ -7,44 +8,42 @@
 #include <iostream>
 
 Game::Game()
- : m_window(nullptr)
- , m_screen_width(640)
- , m_screen_height(480)
- , m_state(GameState::PLAY)
+  : m_window(nullptr)
+  , m_screen_width(640)
+  , m_screen_height(480)
+  , m_state(GameState::PLAY)
+  , m_sprite()
 {
   init();
 }
 
 Game::~Game()
-{
-  SDL_DestroyWindow(m_window);
-  SDL_Quit();
-}
+{}
 
 void Game::init()
 {
   if (!SDL_Init(SDL_INIT_VIDEO))
   {
-    std::cerr << "Failed to initialize SDL!\n";
+    MSG_ERROR("Failed to initialize SDL!");
   }
 
   m_window = SDL_CreateWindow("Throne Engine", m_screen_width, m_screen_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 
   if (!m_window)
   {
-    std::cerr << "Failed to create SDL window!\n";
+    MSG_ERROR("Failed to create SDL window!");
   }
 
   SDL_GLContext opengl_context = SDL_GL_CreateContext(m_window);
 
   if (!opengl_context)
   {
-    std::cerr << "Failed to create SDL OpenGL context!\n";
+    MSG_ERROR("Failed to create SDL OpenGL context!");
   }
 
   if (!gladLoadGL(SDL_GL_GetProcAddress))
   {
-    std::cerr << "Failed to retrieved OpenGL functions via GLAD!\n";
+    MSG_ERROR("Failed to retrieved OpenGL function via GLAD!\n");
   }
 
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -52,6 +51,8 @@ void Game::init()
 
   glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
   glClearDepth(1.0);
+
+  m_sprite.create();
 }
 
 void Game::update()
@@ -72,7 +73,17 @@ void Game::handleEvents()
     switch(event.type)
     {
       case SDL_EVENT_QUIT:
+      {
         m_state = GameState::EXIT;
+      }
+      break;
+
+      case SDL_EVENT_WINDOW_RESIZED:
+      {
+        SDL_GetWindowSize(m_window, &m_screen_width, &m_screen_height);
+
+        glViewport(0, 0, m_screen_width, m_screen_height);
+      }
       break;
     }
   }
@@ -81,6 +92,8 @@ void Game::handleEvents()
 void Game::handleRendering()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  m_sprite.draw();
 
   SDL_GL_SwapWindow(m_window);
 }
