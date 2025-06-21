@@ -48,11 +48,11 @@ void Sprite::draw()
   glBindBuffer(GL_ARRAY_BUFFER, m_vbo_id);
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-  glPolygonMode(GL_FRONT, GL_LINE);
-  glPolygonMode(GL_BACK, GL_LINE);
+  //glPolygonMode(GL_FRONT, GL_LINE);
+  //glPolygonMode(GL_BACK, GL_LINE);
   glDrawArrays(GL_TRIANGLES, 0, 6);
-  glPolygonMode(GL_FRONT, GL_FILL);
-  glPolygonMode(GL_BACK, GL_FILL);
+  //glPolygonMode(GL_FRONT, GL_FILL);
+  //glPolygonMode(GL_BACK, GL_FILL);
   glDisableVertexAttribArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

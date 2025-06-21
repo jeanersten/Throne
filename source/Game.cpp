@@ -13,6 +13,7 @@ Game::Game()
   , m_screen_height(480)
   , m_state(GameState::PLAY)
   , m_sprite()
+  , m_shader()
 {
   init();
 }
@@ -26,6 +27,8 @@ void Game::init()
   {
     MSG_ERROR("Failed to initialize SDL!");
   }
+
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
   m_window = SDL_CreateWindow("Throne Engine", m_screen_width, m_screen_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 
@@ -46,11 +49,13 @@ void Game::init()
     MSG_ERROR("Failed to retrieved OpenGL function via GLAD!\n");
   }
 
-  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
   SDL_GL_SetSwapInterval(1);
 
   glClearColor(0.3f, 0.5f, 0.4f, 1.0f);
   glClearDepth(1.0);
+
+  m_shader.compileShaders("C:\\Dev\\Throne\\resource\\VertexSample.vert", "C:\\Dev\\Throne\\resource\\FragmentSample.frag");
+  m_shader.linkShaders();
 
   m_sprite.create();
 }
@@ -93,7 +98,9 @@ void Game::handleRendering()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  m_shader.use();
   m_sprite.draw();
+  m_shader.unuse();
 
   SDL_GL_SwapWindow(m_window);
 }

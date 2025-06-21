@@ -16,10 +16,12 @@ add_executable(Throne
   "source/Game.cpp"
   "source/Log.cpp"
   "source/Main.cpp"
+  "source/Shader.cpp"
   "source/Sprite.cpp"
 
   "source/Log.h"
   "source/Game.h"
+  "source/Shader.cpp"
   "source/Sprite.h"
 )
 

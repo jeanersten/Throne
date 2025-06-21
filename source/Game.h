@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Sprite.h"
+#include "Shader.h"
 
 #include <SDL3/SDL.h>
 
@@ -21,6 +22,8 @@ private:
   GameState m_state;
 
   Sprite m_sprite;
+
+  Shader m_shader;
 
   void init();
   void update();
